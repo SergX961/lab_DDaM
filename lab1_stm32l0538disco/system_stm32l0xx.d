@@ -1,0 +1,10 @@
+.\system_stm32l0xx.o: RTE\Device\STM32L053C8Tx\system_stm32l0xx.c
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\2.0.1\Drivers\CMSIS\Device\ST\STM32L0xx\Include\stm32l0xx.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\2.0.1\Drivers\CMSIS\Device\ST\STM32L0xx\Include\stm32l053xx.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm0plus.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h
+.\system_stm32l0xx.o: C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\2.0.1\Drivers\CMSIS\Device\ST\STM32L0xx\Include\system_stm32l0xx.h

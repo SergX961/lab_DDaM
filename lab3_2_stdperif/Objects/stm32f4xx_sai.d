@@ -1,0 +1,10 @@
+.\objects\stm32f4xx_sai.o: STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sai.c
+.\objects\stm32f4xx_sai.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_sai.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Include\core_cm4.h
+.\objects\stm32f4xx_sai.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Include\core_cmInstr.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Include\core_cmFunc.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Include\core_cmSimd.h
+.\objects\stm32f4xx_sai.o: .\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
+.\objects\stm32f4xx_sai.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_rcc.h
