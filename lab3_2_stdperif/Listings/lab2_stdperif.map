@@ -15,10 +15,10 @@ Section Cross References
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_TimeBaseInit) for TIM_TimeBaseInit
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_OCStructInit) for TIM_OCStructInit
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_OC1Init) for TIM_OC1Init
+    main.o(i.init_TIM) refers to main.o(i.leds_on) for leds_on
     main.o(i.leds_on) refers to main.o(.data) for delay_led_blue
     main.o(i.main) refers to main.o(i.init_GPIO) for init_GPIO
     main.o(i.main) refers to main.o(i.init_TIM) for init_TIM
-    main.o(i.main) refers to main.o(i.leds_on) for leds_on
     main.o(i.main) refers to stm32f4xx_tim.o(i.TIM_Cmd) for TIM_Cmd
     main.o(i.main) refers to stm32f4xx_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
     main.o(i.main) refers to system_stm32f4xx.o(.data) for SystemCoreClock
@@ -1394,8 +1394,8 @@ Image Symbol Table
     i.TIM_TimeBaseStructInit                 0x080007e0   Section        0  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
     i.init_GPIO                              0x080007f4   Section        0  main.o(i.init_GPIO)
     i.init_TIM                               0x08000888   Section        0  main.o(i.init_TIM)
-    i.leds_on                                0x080008e4   Section        0  main.o(i.leds_on)
-    i.main                                   0x08000900   Section        0  main.o(i.main)
+    i.leds_on                                0x080008e8   Section        0  main.o(i.leds_on)
+    i.main                                   0x08000904   Section        0  main.o(i.main)
     x$fpl$fpinit                             0x08000980   Section       10  fpinit.o(x$fpl$fpinit)
     $v0                                      0x08000980   Number         0  fpinit.o(x$fpl$fpinit)
     .data                                    0x20000000   Section        6  main.o(.data)
@@ -1614,9 +1614,9 @@ Image Symbol Table
     TIM_TimeBaseInit                         0x0800075d   Thumb Code   104  stm32f4xx_tim.o(i.TIM_TimeBaseInit)
     TIM_TimeBaseStructInit                   0x080007e1   Thumb Code    18  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
     init_GPIO                                0x080007f5   Thumb Code   140  main.o(i.init_GPIO)
-    init_TIM                                 0x08000889   Thumb Code    86  main.o(i.init_TIM)
-    leds_on                                  0x080008e5   Thumb Code    18  main.o(i.leds_on)
-    main                                     0x08000901   Thumb Code   108  main.o(i.main)
+    init_TIM                                 0x08000889   Thumb Code    90  main.o(i.init_TIM)
+    leds_on                                  0x080008e9   Thumb Code    18  main.o(i.leds_on)
+    main                                     0x08000905   Thumb Code   104  main.o(i.main)
     _fp_init                                 0x08000981   Thumb Code    10  fpinit.o(x$fpl$fpinit)
     __fplib_config_fpu_vfp                   0x08000989   Thumb Code     0  fpinit.o(x$fpl$fpinit)
     __fplib_config_pureend_doubles           0x08000989   Thumb Code     0  fpinit.o(x$fpl$fpinit)
@@ -1717,9 +1717,9 @@ Memory Map of the image
     0x080007e0   0x00000012   Code   RO         4434    i.TIM_TimeBaseStructInit  stm32f4xx_tim.o
     0x080007f2   0x00000002   PAD
     0x080007f4   0x00000094   Code   RO            6    i.init_GPIO         main.o
-    0x08000888   0x0000005c   Code   RO            7    i.init_TIM          main.o
-    0x080008e4   0x0000001c   Code   RO            8    i.leds_on           main.o
-    0x08000900   0x00000080   Code   RO            9    i.main              main.o
+    0x08000888   0x00000060   Code   RO            7    i.init_TIM          main.o
+    0x080008e8   0x0000001c   Code   RO            8    i.leds_on           main.o
+    0x08000904   0x0000007c   Code   RO            9    i.main              main.o
     0x08000980   0x0000000a   Code   RO         5311    x$fpl$fpinit        fz_wm.l(fpinit.o)
     0x0800098a   0x00000002   PAD
     0x0800098c   0x00000020   Data   RO         5379    Region$$Table       anon$$obj.o

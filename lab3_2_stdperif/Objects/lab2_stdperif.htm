@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lab2_stdperif.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lab2_stdperif.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Mar 10 12:57:10 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Mar 16 01:50:37 2021
 <BR><P>
 <H3>Maximum Stack Usage =         56 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -697,7 +697,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7c]"></a>init_TIM</STRONG> (Thumb, 86 bytes, Stack size 40 bytes, main.o(i.init_TIM))
+<P><STRONG><a name="[7c]"></a>init_TIM</STRONG> (Thumb, 90 bytes, Stack size 40 bytes, main.o(i.init_TIM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = init_TIM &rArr; TIM_OC1Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseStructInit
@@ -705,20 +705,20 @@ Global Symbols
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OCStructInit
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;leds_on
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[82]"></a>leds_on</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.leds_on))
-<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_TIM
 </UL>
 
-<P><STRONG><a name="[6e]"></a>main</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[6e]"></a>main</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = main &rArr; init_TIM &rArr; TIM_OC1Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;leds_on
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_TIM
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_GPIO
 </UL>

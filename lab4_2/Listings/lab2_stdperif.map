@@ -18,35 +18,30 @@ Section Cross References
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_TimeBaseInit) for TIM_TimeBaseInit
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_OCStructInit) for TIM_OCStructInit
     main.o(i.init_TIM) refers to stm32f4xx_tim.o(i.TIM_OC1Init) for TIM_OC1Init
+    main.o(i.init_TIM) refers to system_stm32f4xx.o(.data) for SystemCoreClock
     main.o(i.main) refers to main.o(i.init_GPIO) for init_GPIO
     main.o(i.main) refers to main.o(i.init_TIM) for init_TIM
     main.o(i.main) refers to main.o(i.traffic_light) for traffic_light
-    main.o(i.main) refers to system_stm32f4xx.o(.data) for SystemCoreClock
+    main.o(i.main) refers to main.o(.data) for traffic_light_delay
     main.o(i.traffic_light) refers to main.o(i.traffic_light_state_0) for traffic_light_state_0
     main.o(i.traffic_light) refers to main.o(i.traffic_light_state_1) for traffic_light_state_1
     main.o(i.traffic_light) refers to main.o(i.traffic_light_state_2) for traffic_light_state_2
-    main.o(i.traffic_light) refers to main.o(i.traffic_light_state_3) for traffic_light_state_3
     main.o(i.traffic_light) refers to main.o(i.traffic_light_state_4) for traffic_light_state_4
     main.o(i.traffic_light) refers to main.o(.data) for traffic_light_state
     main.o(i.traffic_light_state_0) refers to stm32f4xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     main.o(i.traffic_light_state_0) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
-    main.o(i.traffic_light_state_0) refers to main.o(i.delay_on_tim) for delay_on_tim
     main.o(i.traffic_light_state_0) refers to main.o(.data) for traffic_light_state
     main.o(i.traffic_light_state_1) refers to stm32f4xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     main.o(i.traffic_light_state_1) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
-    main.o(i.traffic_light_state_1) refers to main.o(i.delay_on_tim) for delay_on_tim
     main.o(i.traffic_light_state_1) refers to main.o(.data) for traffic_light_state
     main.o(i.traffic_light_state_2) refers to stm32f4xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     main.o(i.traffic_light_state_2) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
-    main.o(i.traffic_light_state_2) refers to main.o(i.delay_on_tim) for delay_on_tim
     main.o(i.traffic_light_state_2) refers to main.o(.data) for traffic_light_state
     main.o(i.traffic_light_state_3) refers to stm32f4xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
-    main.o(i.traffic_light_state_3) refers to main.o(i.delay_on_tim) for delay_on_tim
-    main.o(i.traffic_light_state_3) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
+    main.o(i.traffic_light_state_3) refers to stm32f4xx_gpio.o(i.GPIO_ToggleBits) for GPIO_ToggleBits
     main.o(i.traffic_light_state_3) refers to main.o(.data) for traffic_light_state
     main.o(i.traffic_light_state_4) refers to stm32f4xx_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     main.o(i.traffic_light_state_4) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
-    main.o(i.traffic_light_state_4) refers to main.o(i.delay_on_tim) for delay_on_tim
     main.o(i.traffic_light_state_4) refers to main.o(.data) for traffic_light_state
     stm32f4xx_gpio.o(i.GPIO_DeInit) refers to stm32f4xx_rcc.o(i.RCC_AHB1PeriphResetCmd) for RCC_AHB1PeriphResetCmd
     stm32f4xx_rcc.o(i.RCC_GetClocksFreq) refers to stm32f4xx_rcc.o(.data) for APBAHBPrescTable
@@ -375,6 +370,8 @@ Removing Unused input sections from the image.
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
     Removing main.o(.rrx_text), (6 bytes).
+    Removing main.o(i.delay_on_tim), (20 bytes).
+    Removing main.o(i.traffic_light_state_3), (92 bytes).
     Removing stm32f4xx_gpio.o(.rev16_text), (4 bytes).
     Removing stm32f4xx_gpio.o(.revsh_text), (4 bytes).
     Removing stm32f4xx_gpio.o(.rrx_text), (6 bytes).
@@ -1198,7 +1195,7 @@ Removing Unused input sections from the image.
     Removing system_stm32f4xx.o(.rrx_text), (6 bytes).
     Removing system_stm32f4xx.o(i.SystemCoreClockUpdate), (192 bytes).
 
-825 unused section(s) (total 35758 bytes) removed from the image.
+827 unused section(s) (total 35870 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1208,51 +1205,51 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
@@ -1414,26 +1411,25 @@ Image Symbol Table
     i.SetSysClock                            0x08000508   Section        0  system_stm32f4xx.o(i.SetSysClock)
     SetSysClock                              0x08000509   Thumb Code   220  system_stm32f4xx.o(i.SetSysClock)
     i.SysTick_Handler                        0x080005f4   Section        0  main.o(i.SysTick_Handler)
-    i.SystemInit                             0x08000650   Section        0  system_stm32f4xx.o(i.SystemInit)
-    i.TIM_OC1Init                            0x080006b8   Section        0  stm32f4xx_tim.o(i.TIM_OC1Init)
-    i.TIM_OCStructInit                       0x08000734   Section        0  stm32f4xx_tim.o(i.TIM_OCStructInit)
-    i.TIM_TimeBaseInit                       0x08000748   Section        0  stm32f4xx_tim.o(i.TIM_TimeBaseInit)
-    i.TIM_TimeBaseStructInit                 0x080007cc   Section        0  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
-    i.delay_on_tim                           0x080007e0   Section        0  main.o(i.delay_on_tim)
-    i.init_GPIO                              0x080007f4   Section        0  main.o(i.init_GPIO)
-    i.init_TIM                               0x080008b8   Section        0  main.o(i.init_TIM)
-    i.main                                   0x08000914   Section        0  main.o(i.main)
-    i.traffic_light                          0x08000980   Section        0  main.o(i.traffic_light)
-    i.traffic_light_state_0                  0x080009bc   Section        0  main.o(i.traffic_light_state_0)
-    i.traffic_light_state_1                  0x080009f4   Section        0  main.o(i.traffic_light_state_1)
-    i.traffic_light_state_2                  0x08000a2c   Section        0  main.o(i.traffic_light_state_2)
-    i.traffic_light_state_3                  0x08000a64   Section        0  main.o(i.traffic_light_state_3)
-    i.traffic_light_state_4                  0x08000ac4   Section        0  main.o(i.traffic_light_state_4)
-    x$fpl$fpinit                             0x08000afc   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x08000afc   Number         0  fpinit.o(x$fpl$fpinit)
-    .data                                    0x20000000   Section        7  main.o(.data)
-    .data                                    0x20000008   Section       20  system_stm32f4xx.o(.data)
-    .bss                                     0x2000001c   Section       96  libspace.o(.bss)
+    i.SystemInit                             0x0800066c   Section        0  system_stm32f4xx.o(i.SystemInit)
+    i.TIM_OC1Init                            0x080006d4   Section        0  stm32f4xx_tim.o(i.TIM_OC1Init)
+    i.TIM_OCStructInit                       0x08000750   Section        0  stm32f4xx_tim.o(i.TIM_OCStructInit)
+    i.TIM_TimeBaseInit                       0x08000764   Section        0  stm32f4xx_tim.o(i.TIM_TimeBaseInit)
+    i.TIM_TimeBaseStructInit                 0x080007e8   Section        0  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
+    i.init_GPIO                              0x080007fc   Section        0  main.o(i.init_GPIO)
+    i.init_TIM                               0x080008c0   Section        0  main.o(i.init_TIM)
+    i.main                                   0x08000974   Section        0  main.o(i.main)
+    i.traffic_light                          0x08000990   Section        0  main.o(i.traffic_light)
+    i.traffic_light_state_0                  0x080009c8   Section        0  main.o(i.traffic_light_state_0)
+    i.traffic_light_state_1                  0x08000a04   Section        0  main.o(i.traffic_light_state_1)
+    i.traffic_light_state_2                  0x08000a40   Section        0  main.o(i.traffic_light_state_2)
+    i.traffic_light_state_4                  0x08000a7c   Section        0  main.o(i.traffic_light_state_4)
+    x$fpl$fpinit                             0x08000ab8   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x08000ab8   Number         0  fpinit.o(x$fpl$fpinit)
+    .data                                    0x20000000   Section       10  main.o(.data)
+    k                                        0x20000009   Data           1  main.o(.data)
+    .data                                    0x2000000c   Section       20  system_stm32f4xx.o(.data)
+    .bss                                     0x20000020   Section       96  libspace.o(.bss)
     HEAP                                     0x20000080   Section      512  startup_stm32f40_41xxx.o(HEAP)
     Heap_Mem                                 0x20000080   Data         512  startup_stm32f40_41xxx.o(HEAP)
     STACK                                    0x20000280   Section     1024  startup_stm32f40_41xxx.o(STACK)
@@ -1638,35 +1634,34 @@ Image Symbol Table
     NVIC_Init                                0x08000451   Thumb Code   106  misc.o(i.NVIC_Init)
     RCC_AHB1PeriphClockCmd                   0x080004c9   Thumb Code    26  stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd)
     RCC_APB1PeriphClockCmd                   0x080004e9   Thumb Code    26  stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd)
-    SysTick_Handler                          0x080005f5   Thumb Code    72  main.o(i.SysTick_Handler)
-    SystemInit                               0x08000651   Thumb Code    88  system_stm32f4xx.o(i.SystemInit)
-    TIM_OC1Init                              0x080006b9   Thumb Code   114  stm32f4xx_tim.o(i.TIM_OC1Init)
-    TIM_OCStructInit                         0x08000735   Thumb Code    20  stm32f4xx_tim.o(i.TIM_OCStructInit)
-    TIM_TimeBaseInit                         0x08000749   Thumb Code   104  stm32f4xx_tim.o(i.TIM_TimeBaseInit)
-    TIM_TimeBaseStructInit                   0x080007cd   Thumb Code    18  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
-    delay_on_tim                             0x080007e1   Thumb Code    16  main.o(i.delay_on_tim)
-    init_GPIO                                0x080007f5   Thumb Code   186  main.o(i.init_GPIO)
-    init_TIM                                 0x080008b9   Thumb Code    86  main.o(i.init_TIM)
-    main                                     0x08000915   Thumb Code    94  main.o(i.main)
-    traffic_light                            0x08000981   Thumb Code    54  main.o(i.traffic_light)
-    traffic_light_state_0                    0x080009bd   Thumb Code    46  main.o(i.traffic_light_state_0)
-    traffic_light_state_1                    0x080009f5   Thumb Code    46  main.o(i.traffic_light_state_1)
-    traffic_light_state_2                    0x08000a2d   Thumb Code    48  main.o(i.traffic_light_state_2)
-    traffic_light_state_3                    0x08000a65   Thumb Code    88  main.o(i.traffic_light_state_3)
-    traffic_light_state_4                    0x08000ac5   Thumb Code    48  main.o(i.traffic_light_state_4)
-    _fp_init                                 0x08000afd   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08000b05   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08000b05   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x08000b08   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000b28   Number         0  anon$$obj.o(Region$$Table)
+    SysTick_Handler                          0x080005f5   Thumb Code    94  main.o(i.SysTick_Handler)
+    SystemInit                               0x0800066d   Thumb Code    88  system_stm32f4xx.o(i.SystemInit)
+    TIM_OC1Init                              0x080006d5   Thumb Code   114  stm32f4xx_tim.o(i.TIM_OC1Init)
+    TIM_OCStructInit                         0x08000751   Thumb Code    20  stm32f4xx_tim.o(i.TIM_OCStructInit)
+    TIM_TimeBaseInit                         0x08000765   Thumb Code   104  stm32f4xx_tim.o(i.TIM_TimeBaseInit)
+    TIM_TimeBaseStructInit                   0x080007e9   Thumb Code    18  stm32f4xx_tim.o(i.TIM_TimeBaseStructInit)
+    init_GPIO                                0x080007fd   Thumb Code   186  main.o(i.init_GPIO)
+    init_TIM                                 0x080008c1   Thumb Code   164  main.o(i.init_TIM)
+    main                                     0x08000975   Thumb Code    22  main.o(i.main)
+    traffic_light                            0x08000991   Thumb Code    50  main.o(i.traffic_light)
+    traffic_light_state_0                    0x080009c9   Thumb Code    46  main.o(i.traffic_light_state_0)
+    traffic_light_state_1                    0x08000a05   Thumb Code    46  main.o(i.traffic_light_state_1)
+    traffic_light_state_2                    0x08000a41   Thumb Code    46  main.o(i.traffic_light_state_2)
+    traffic_light_state_4                    0x08000a7d   Thumb Code    48  main.o(i.traffic_light_state_4)
+    _fp_init                                 0x08000ab9   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08000ac1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08000ac1   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x08000ac4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000ae4   Number         0  anon$$obj.o(Region$$Table)
     traffic_light_state                      0x20000000   Data           1  main.o(.data)
     delay_count                              0x20000002   Data           2  main.o(.data)
     button_delay                             0x20000004   Data           2  main.o(.data)
-    button_change_state                      0x20000006   Data           1  main.o(.data)
-    SystemCoreClock                          0x20000008   Data           4  system_stm32f4xx.o(.data)
-    AHBPrescTable                            0x2000000c   Data          16  system_stm32f4xx.o(.data)
-    __libspace_start                         0x2000001c   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000007c   Data           0  libspace.o(.bss)
+    traffic_light_delay                      0x20000006   Data           2  main.o(.data)
+    button_delay_end                         0x20000008   Data           1  main.o(.data)
+    SystemCoreClock                          0x2000000c   Data           4  system_stm32f4xx.o(.data)
+    AHBPrescTable                            0x20000010   Data          16  system_stm32f4xx.o(.data)
+    __libspace_start                         0x20000020   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000080   Data           0  libspace.o(.bss)
 
 
 
@@ -1676,9 +1671,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000229
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000b44, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000b04, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x08000000, Size: 0x00000b28, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x08000000, Size: 0x00000ae4, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1752,43 +1747,40 @@ Memory Map of the image
     0x080004c8   0x00000020   Code   RO          266    i.RCC_AHB1PeriphClockCmd  stm32f4xx_rcc.o
     0x080004e8   0x00000020   Code   RO          275    i.RCC_APB1PeriphClockCmd  stm32f4xx_rcc.o
     0x08000508   0x000000ec   Code   RO         5248    i.SetSysClock       system_stm32f4xx.o
-    0x080005f4   0x0000005c   Code   RO            5    i.SysTick_Handler   main.o
-    0x08000650   0x00000068   Code   RO         5250    i.SystemInit        system_stm32f4xx.o
-    0x080006b8   0x0000007c   Code   RO         4453    i.TIM_OC1Init       stm32f4xx_tim.o
-    0x08000734   0x00000014   Code   RO         4471    i.TIM_OCStructInit  stm32f4xx_tim.o
-    0x08000748   0x00000084   Code   RO         4496    i.TIM_TimeBaseInit  stm32f4xx_tim.o
-    0x080007cc   0x00000012   Code   RO         4497    i.TIM_TimeBaseStructInit  stm32f4xx_tim.o
-    0x080007de   0x00000002   PAD
-    0x080007e0   0x00000014   Code   RO            6    i.delay_on_tim      main.o
-    0x080007f4   0x000000c4   Code   RO            7    i.init_GPIO         main.o
-    0x080008b8   0x0000005c   Code   RO            8    i.init_TIM          main.o
-    0x08000914   0x0000006c   Code   RO            9    i.main              main.o
-    0x08000980   0x0000003c   Code   RO           10    i.traffic_light     main.o
-    0x080009bc   0x00000038   Code   RO           11    i.traffic_light_state_0  main.o
-    0x080009f4   0x00000038   Code   RO           12    i.traffic_light_state_1  main.o
-    0x08000a2c   0x00000038   Code   RO           13    i.traffic_light_state_2  main.o
-    0x08000a64   0x00000060   Code   RO           14    i.traffic_light_state_3  main.o
-    0x08000ac4   0x00000038   Code   RO           15    i.traffic_light_state_4  main.o
-    0x08000afc   0x0000000a   Code   RO         5377    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08000b06   0x00000002   PAD
-    0x08000b08   0x00000020   Data   RO         5445    Region$$Table       anon$$obj.o
+    0x080005f4   0x00000078   Code   RO            5    i.SysTick_Handler   main.o
+    0x0800066c   0x00000068   Code   RO         5250    i.SystemInit        system_stm32f4xx.o
+    0x080006d4   0x0000007c   Code   RO         4453    i.TIM_OC1Init       stm32f4xx_tim.o
+    0x08000750   0x00000014   Code   RO         4471    i.TIM_OCStructInit  stm32f4xx_tim.o
+    0x08000764   0x00000084   Code   RO         4496    i.TIM_TimeBaseInit  stm32f4xx_tim.o
+    0x080007e8   0x00000012   Code   RO         4497    i.TIM_TimeBaseStructInit  stm32f4xx_tim.o
+    0x080007fa   0x00000002   PAD
+    0x080007fc   0x000000c4   Code   RO            7    i.init_GPIO         main.o
+    0x080008c0   0x000000b4   Code   RO            8    i.init_TIM          main.o
+    0x08000974   0x0000001c   Code   RO            9    i.main              main.o
+    0x08000990   0x00000038   Code   RO           10    i.traffic_light     main.o
+    0x080009c8   0x0000003c   Code   RO           11    i.traffic_light_state_0  main.o
+    0x08000a04   0x0000003c   Code   RO           12    i.traffic_light_state_1  main.o
+    0x08000a40   0x0000003c   Code   RO           13    i.traffic_light_state_2  main.o
+    0x08000a7c   0x0000003c   Code   RO           15    i.traffic_light_state_4  main.o
+    0x08000ab8   0x0000000a   Code   RO         5377    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08000ac2   0x00000002   PAD
+    0x08000ac4   0x00000020   Data   RO         5445    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x20000000, Size: 0x0000001c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x00000020, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000007   Data   RW           16    .data               main.o
-    0x20000007   0x00000001   PAD
-    0x20000008   0x00000014   Data   RW         5251    .data               system_stm32f4xx.o
+    0x20000000   0x0000000a   Data   RW           16    .data               main.o
+    0x2000000a   0x00000002   PAD
+    0x2000000c   0x00000014   Data   RW         5251    .data               system_stm32f4xx.o
 
 
-    Execution Region ER_ZI (Base: 0x2000001c, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Base: 0x20000020, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2000001c   0x00000060   Zero   RW         5319    .bss                c_w.l(libspace.o)
-    0x2000007c   0x00000004   PAD
+    0x20000020   0x00000060   Zero   RW         5319    .bss                c_w.l(libspace.o)
     0x20000080   0x00000200   Zero   RW         5239    HEAP                startup_stm32f40_41xxx.o
     0x20000280   0x00000400   Zero   RW         5238    STACK               startup_stm32f40_41xxx.o
 
@@ -1800,7 +1792,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       920        120          0          7          0     304664   main.o
+       852        128          0         10          0     304198   main.o
        120         14          0          0          0       2724   misc.o
         64         26        392          0       1536        896   startup_stm32f40_41xxx.o
        160         12          0          0          0       3993   stm32f4xx_exti.o
@@ -1810,9 +1802,9 @@ Image component sizes
        340         32          0         20          0       1969   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      2136        254        424         28       1536     585077   Object Totals
+      2068        262        424         32       1536     584611   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         4          0          0          1          0          0   (incl. Padding)
+         4          0          0          2          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1841,8 +1833,8 @@ Image component sizes
         10          0          0          0          0        116   fpinit.o
 
     ----------------------------------------------------------------------
-       296         16          0          0        100        700   Library Totals
-        10          0          0          0          4          0   (incl. Padding)
+       296         16          0          0         96        700   Library Totals
+        10          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1852,7 +1844,7 @@ Image component sizes
         10          0          0          0          0        116   fz_wm.l
 
     ----------------------------------------------------------------------
-       296         16          0          0        100        700   Library Totals
+       296         16          0          0         96        700   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1861,15 +1853,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2432        270        424         28       1636     583221   Grand Totals
-      2432        270        424         28       1636     583221   ELF Image Totals
-      2432        270        424         28          0          0   ROM Totals
+      2364        278        424         32       1632     582955   Grand Totals
+      2364        278        424         32       1632     582955   ELF Image Totals
+      2364        278        424         32          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2856 (   2.79kB)
+    Total RO  Size (Code + RO Data)                 2788 (   2.72kB)
     Total RW  Size (RW Data + ZI Data)              1664 (   1.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       2884 (   2.82kB)
+    Total ROM Size (Code + RO Data + RW Data)       2820 (   2.75kB)
 
 ==============================================================================
 

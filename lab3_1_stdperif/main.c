@@ -15,6 +15,7 @@
 #define STATE_BUTTON() (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0))
 
 uint16_t delay_count = 0;
+uint8_t traffic_light_state = 0;
 
 void SysTick_Handler(void) {
 	if (delay_count > 0)
@@ -58,26 +59,64 @@ void init_GPIO (void) {
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
-void traffic_light (void) {
+
+void traffic_light_state_0 (void) {
+	traffic_light_state = 1;
+	GREEN_OFF();
+	YELLOW_OFF();
 	RED_ON();
 	delay_on_tim(SECOND * 5);
+}
+void traffic_light_state_1 (void) {
+	traffic_light_state = 2;
+	GREEN_OFF();
+	RED_OFF();
 	YELLOW_ON();
 	delay_on_tim(SECOND * 3);
-	RED_OFF();
+}
+void traffic_light_state_2 (void) {
+	traffic_light_state = 3;
+	RED_ON();
 	YELLOW_OFF();
 	GREEN_ON();
 	delay_on_tim(SECOND * 5);
+}
+void traffic_light_state_3 (void) {
+	traffic_light_state = 4;
+	RED_OFF();
+	YELLOW_OFF();
 	for(uint8_t k = 0; k < 3; k++) {
+		if (traffic_light_state != 4)
+			return;
 		GREEN_OFF();
 		delay_on_tim(SECOND);
 		GREEN_ON();
 		delay_on_tim(SECOND);
 	}
+}
+void traffic_light_state_4 (void) {
+	traffic_light_state = 0;
+	RED_OFF();
 	GREEN_OFF();
 	YELLOW_ON();
-	delay_on_tim(SECOND * 3);;
-	YELLOW_OFF();
+	delay_on_tim(SECOND * 3);
 }
+
+void traffic_light (void) {
+	switch (traffic_light_state){
+		case 0: traffic_light_state_0();
+			break;
+		case 1: traffic_light_state_1();
+			break;
+		case 2: traffic_light_state_2();
+			break;
+		case 3: traffic_light_state_3();
+			break;
+		case 4: traffic_light_state_4();
+			break;
+	}
+}
+
 
 int main (void) {
 	SysTick_Config(SystemCoreClock/1000);

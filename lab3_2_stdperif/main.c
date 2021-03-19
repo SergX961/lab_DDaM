@@ -80,6 +80,11 @@ void init_GPIO (void) {
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
 }
+void leds_on (void) {
+	delay_led_blue = DELAY_LED_BLUE;
+	delay_led_red = DELAY_LED_RED;
+}
+
 
 void init_TIM(void) {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
@@ -100,19 +105,17 @@ void init_TIM(void) {
 	timerPWM.TIM_Pulse = 42;
 	timerPWM.TIM_OCPolarity = TIM_OCPolarity_High;
 	TIM_OC1Init(TIM4, &timerPWM);
+	
+	leds_on();
 }
 
-void leds_on (void) {
-	delay_led_blue = DELAY_LED_BLUE;
-	delay_led_red = DELAY_LED_RED;
-}
 
 int main (void) {
 	SysTick_Config(SystemCoreClock/1000);
 	init_GPIO();
 	init_TIM();
 	
-	leds_on();
+	
 	TIM_Cmd(TIM4, ENABLE);
  static	RCC_ClocksTypeDef RCC_Clocks;
 	RCC_GetClocksFreq(&RCC_Clocks);

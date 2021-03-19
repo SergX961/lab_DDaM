@@ -11,32 +11,39 @@
 #define DELAY_LED_BLUE 250
 #define DELAY_LED_RED 650
 
-#define RED_TOGGLE()  (GPIO_ToggleBits(GPIOD, GPIO_Pin_14))
-#define BLUE_TOGGLE() (GPIO_ToggleBits(GPIOD, GPIO_Pin_15))
-#define RED_ON() 			(GPIO_SetBits(GPIOD, GPIO_Pin_14))
-#define RED_OFF() 		(GPIO_ResetBits(GPIOD, GPIO_Pin_14))
-#define GREEN_ON() 		(GPIO_SetBits(GPIOD, GPIO_Pin_12))
-#define GREEN_OFF()	  (GPIO_ResetBits(GPIOD, GPIO_Pin_12))
-#define YELLOW_ON() 	(GPIO_SetBits(GPIOD, GPIO_Pin_13))
-#define YELLOW_OFF()  (GPIO_ResetBits(GPIOD, GPIO_Pin_13))
+#define RED_TOGGLE()   (GPIO_ToggleBits(GPIOD, GPIO_Pin_14))
+#define BLUE_TOGGLE()  (GPIO_ToggleBits(GPIOD, GPIO_Pin_15))
+#define GREEN_TOGGLE() (GPIO_ToggleBits(GPIOD, GPIO_Pin_12))
+#define RED_ON() 			 (GPIO_SetBits(GPIOD, GPIO_Pin_14))
+#define RED_OFF() 		 (GPIO_ResetBits(GPIOD, GPIO_Pin_14))
+#define GREEN_ON() 		 (GPIO_SetBits(GPIOD, GPIO_Pin_12))
+#define GREEN_OFF()	   (GPIO_ResetBits(GPIOD, GPIO_Pin_12))
+#define YELLOW_ON() 	 (GPIO_SetBits(GPIOD, GPIO_Pin_13))
+#define YELLOW_OFF()   (GPIO_ResetBits(GPIOD, GPIO_Pin_13))
 
 #define STATE_BUTTON() (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0))
 uint8_t traffic_light_state = 0;
 uint16_t delay_count = 0,
-				 button_delay = 0;
+				 button_delay = 0,
+				 traffic_light_delay = 0;
 
 _Bool button_delay_end = 1;
 void SysTick_Handler(void) {
 	if (delay_count > 0)
 		delay_count--;
 	
+	if (traffic_light_delay > 0)
+		traffic_light_delay --;
+	
 	if(button_delay > 0)
 		button_delay--;
 	else if (button_delay_end == 0){
 		button_delay_end = 1;
 		
-		if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 1)
+		if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 1) {
 			traffic_light_state = 0;
+			traffic_light_delay = 0;
+		}
 	}
 }
 
@@ -91,6 +98,8 @@ void init_GPIO (void) {
 }
 
 void init_TIM(void) {
+	SysTick_Config(SystemCoreClock/1000);
+	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 	
 	TIM_OCInitTypeDef timerPWM;
@@ -117,33 +126,33 @@ void traffic_light_state_0 (void) {
 	GREEN_OFF();
 	YELLOW_OFF();
 	RED_ON();
-	delay_on_tim(SECOND * 5);
+		traffic_light_delay = SECOND * 5;
 }
 void traffic_light_state_1 (void) {
 	traffic_light_state = 2;
 	GREEN_OFF();
-	RED_OFF();
+	RED_ON();
 	YELLOW_ON();
-	delay_on_tim(SECOND * 3);
+		traffic_light_delay = SECOND * 3;
 }
 void traffic_light_state_2 (void) {
-	traffic_light_state = 3;
-	RED_OFF();
-	YELLOW_OFF();
-	GREEN_ON();
-	delay_on_tim(SECOND * 5);
-}
-void traffic_light_state_3 (void) {
 	traffic_light_state = 4;
 	RED_OFF();
 	YELLOW_OFF();
-	for(uint8_t k = 0; k < 3; k++) {
-		if (traffic_light_state != 3)
+	GREEN_ON();
+		traffic_light_delay = SECOND * 5;
+}
+void traffic_light_state_3 (void) {
+	static uint8_t k = 0;
+	traffic_light_state = 4;
+	RED_OFF();
+	YELLOW_OFF();
+	GREEN_OFF();
+	for(uint8_t k = 0; k < 6; k++) {
+		if (traffic_light_state != 4)
 			return;
-		GREEN_OFF();
-		delay_on_tim(SECOND);
-		GREEN_ON();
-		delay_on_tim(SECOND);
+		GREEN_TOGGLE();
+		traffic_light_delay = SECOND;
 	}
 }
 void traffic_light_state_4 (void) {
@@ -151,7 +160,7 @@ void traffic_light_state_4 (void) {
 	RED_OFF();
 	GREEN_OFF();
 	YELLOW_ON();
-	delay_on_tim(SECOND * 3);
+		traffic_light_delay = SECOND * 3;
 }
 
 void traffic_light (void) {
@@ -161,8 +170,6 @@ void traffic_light (void) {
 		case 1: traffic_light_state_1();
 			break;
 		case 2: traffic_light_state_2();
-			break;
-		case 3: traffic_light_state_3();
 			break;
 		case 4: traffic_light_state_4();
 			break;
@@ -175,12 +182,13 @@ void EXTI0_IRQHandler (void) {
 	button_delay_end = 0;
 }
 int main (void) {
-	SysTick_Config(SystemCoreClock/1000);
 	init_GPIO();
 	init_TIM();
 	
 
+	
 	while(1) {
-		traffic_light();
+		if (traffic_light_delay == 0)
+			traffic_light();
 	}
 }
