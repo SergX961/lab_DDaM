@@ -1,5 +1,5 @@
 Dependencies for Project 'lab2_stdperif', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x6055815F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\STM32F4xx_StdPeriph_Driver\inc -I ..\lab2_stdperif -I .\CMSIS\Device\ST\STM32F4xx\Include -I .\CMSIS\Include-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DSTM32F407xx -DUSE_FULL_ASSERT -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x6058A357)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\STM32F4xx_StdPeriph_Driver\inc -I ..\lab2_stdperif -I .\CMSIS\Device\ST\STM32F4xx\Include -I .\CMSIS\Include-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DSTM32F407xx -DUSE_FULL_ASSERT -DSTM32F40_41xxx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x60318A10)
 I (.\CMSIS\Include\core_cm4.h)(0x581CC64D)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F64D08)

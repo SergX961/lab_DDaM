@@ -56,6 +56,7 @@ void init_GPIO (void) {
 	
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
@@ -93,12 +94,12 @@ void init_GPIO (void) {
 //	EXTI_Init(&EXTI_InitStruct);
 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	GPIO_PinAFConfig(GPIOA,GPIO_PinSource0,GPIO_AF_UART4);
-	GPIO_PinAFConfig(GPIOA,GPIO_PinSource1,GPIO_AF_UART4);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource10,GPIO_AF_UART4);
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource11,GPIO_AF_UART4);
 }
 
 void init_TIM(void) {
@@ -233,13 +234,11 @@ void init_UART (void) {
 static uint8_t k = 0,
 							 n = 0;
 void UART4_IRQHandler (void) {
-	if (USART_GetFlagStatus(UART4, USART_FLAG_IDLE) != RESET) {
-		USART_ClearFlag(UART4, USART_FLAG_IDLE);
-		n++;
-	}
-	if (USART_GetITStatus(UART4, USART_IT_IDLE) == RESET) {
-		USART_ClearITPendingBit(UART4, USART_IT_IDLE);
-	//	USART_ClearITPendingBit(UART4, USART_IT_RXNE);
+	n++;
+	if (USART_GetITStatus(UART4, USART_IT_IDLE) != RESET) {
+		USART_ReceiveData(UART4);
+//		USART_ClearITPendingBit(UART4, USART_IT_IDLE);
+//		USART_ClearITPendingBit(UART4, USART_IT_RXNE);
 	//	dataBuffer[k] = USART_ReceiveData(UART4);
 		DMA_Cmd(DMA1_Stream2, DISABLE);
 		DMA_Init(DMA1_Stream2, &dma);
@@ -247,6 +246,10 @@ void UART4_IRQHandler (void) {
 		DMA_Cmd(DMA1_Stream2, ENABLE);
 		k++;
 	}
+//	static uint8_t symbols_count = 0;
+//	uint8_t symbol = USART_ReceiveData(UART4);
+	
+	
 }
 
 int main (void) {
@@ -255,8 +258,9 @@ int main (void) {
 	init_UART();
 	NVIC_EnableIRQ(UART4_IRQn);
 	USART_Cmd(UART4, ENABLE);
-	DMA_Cmd(DMA1_Stream2, ENABLE);
+	DMA_Cmd(DMA1_Stream2, ENABLE);//?
 	USART_DMACmd(UART4, USART_DMAReq_Rx, ENABLE);
+//	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
 	USART_ITConfig(UART4, USART_IT_IDLE, ENABLE);
 	
 	while(1) {
