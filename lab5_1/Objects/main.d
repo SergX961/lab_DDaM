@@ -13,3 +13,8 @@
 .\objects\main.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h
 .\objects\main.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\objects\main.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
