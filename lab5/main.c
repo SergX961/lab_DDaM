@@ -62,7 +62,7 @@ void init_GPIO (void) {
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;  
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;  
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
@@ -190,7 +190,7 @@ void EXTI0_IRQHandler (void) {
 DMA_InitTypeDef dma;
 USART_InitTypeDef uart4;
 #define DMA_BUFFER_SIZE 20
-uint8_t dataBuffer[DMA_BUFFER_SIZE] = {0};
+uint8_t dataBuffer[DMA_BUFFER_SIZE] = "tx_str_hello";
 
 void init_UART (void) {
 	
