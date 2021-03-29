@@ -264,7 +264,7 @@ void init_UART (void) {
 uint8_t rx_uart_buffer [MAX_RX_COUNT + 1] = {0};
 _Bool rx_allow = true,
       command_recieve = false;
-
+ 
 void UART4_IRQHandler (void) {
 	static uint8_t symbols_count = 0;
 	uint8_t rx_symbol = USART_ReceiveData(UART4);
@@ -301,7 +301,7 @@ void transmit_str (uint8_t * str) {
 }
 
 void return_error (void) {
-	transmit_str("Error occured\n");
+	transmit_str("Error occured\r\n");
 }
 
 uint32_t conv_led_time_to_digit (const char * str) {
@@ -335,7 +335,7 @@ void parse_command (void) {
 	uint32_t led_time = 0;
 	
 	if (!strncmp((const char *)command_str, "get_id", strlen("get_id"))){
-		transmit_str("Device id: 1214\n");
+		transmit_str("Device id: 1214\r\n");
 	} else if (!strncmp((const char *)command_str, "set_time", strlen("set_time"))) {
 		command_str += strlen("set_time") + 1;
 		
@@ -388,7 +388,7 @@ void parse_command (void) {
 		     	blue_state = GPIO_ReadOutputDataBit(GPIOD, GPIO_PIN_BLUE),
 		      button_state = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0);
 		uint8_t state_str [100] = {0};
-		sprintf((char *)state_str, "state leds:R%dY%dG%dB%d button:%d\n", red_state, yellow_state, green_state, blue_state,  button_state);
+		sprintf((char *)state_str, "state leds:R%dY%dG%dB%d button:%d\r\n", red_state, yellow_state, green_state, blue_state,  button_state);
 		transmit_str(state_str);
 	} else {
 		return_error();
@@ -406,11 +406,12 @@ int main (void) {
 	NVIC_EnableIRQ(UART4_IRQn);
 	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
 	
-	transmit_str("System started\n");
+	transmit_str("System started\r\n");
 	
 	while(1) {
 		if (command_recieve) {
 			parse_command();
+			memset(rx_uart_buffer, 0, MAX_RX_COUNT);
 			command_recieve = false;
 			rx_allow = true;
 		}
