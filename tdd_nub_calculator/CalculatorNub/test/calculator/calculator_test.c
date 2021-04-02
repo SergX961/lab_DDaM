@@ -36,6 +36,11 @@ TEST (calculator, calc_mult) {
 
 	answer = idle_calculator (" 1000  * 1000", answer_buf_str);
 	TEST_ASSERT_EQUAL_INT32(1000000, answer);
+
+	answer = idle_calculator (" 1001  * 1000", answer_buf_str);
+	TEST_ASSERT_EQUAL_INT32(0, answer);
+	
+	TEST_ASSERT_EQUAL_STRING_LEN("INF", answer_buf_str, strlen("INF"));
 }
 TEST (calculator, calc_div) {
 	int32_t answer = idle_calculator ("-40 / -4", answer_buf_str);
