@@ -51,9 +51,7 @@ void init_GPIO (void) {
 
 USART_InitTypeDef uart4;
 void init_UART (void) {
-	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 	
 	USART_StructInit(&uart4);
 	uart4.USART_BaudRate = 115200;
