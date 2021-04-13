@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint32_t count_on_board = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,13 +88,22 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-  static uint32_t count_on_board = * ((uint32_t *)FLASH_TYPEPROGRAM_WORD);
+  count_on_board = *((uint32_t *)FLASH_BANK_5_ADDR);
+
   HAL_FLASH_Unlock();
   FLASH_Erase_Sector(FLASH_SECTOR_5, VOLTAGE_RANGE_3);
-  FLASH_WaitForLastOperation((uint32_t)1000U);
-  HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)FLASH_BANK_5_ADDR, count_on_board);
+  HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)FLASH_BANK_5_ADDR, ++count_on_board);
   HAL_FLASH_Lock();
-
+  switch(count_on_board % 4){
+	case 0: HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, 1);
+		break;
+	case 1: HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, 1);
+		break;
+	case 2: HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, 1);
+		break;
+	case 3: HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, 1);
+		break;
+}
 
   /* USER CODE END 2 */
 
@@ -102,6 +111,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
