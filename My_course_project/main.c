@@ -86,10 +86,10 @@ void parse_command (void) {
 	char answer_str[SIZE_ANSWER] = {0};
 	int32_t calc_answer = idle_calculator((char *)command_str, answer_str);
 	
-	if (*answer_str == 0) {
+	if (*answer_str != 0) {
 		transmit_str(answer_str);
 	}else {
-		sprintf(answer_str, "answer = %d", calc_answer);
+		sprintf(answer_str, "answer = %d\r\n", calc_answer);
 		transmit_str(answer_str);
 	}
 	
