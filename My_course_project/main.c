@@ -38,6 +38,10 @@ void init_UART (void) {
 	uart4.USART_Parity = USART_Parity_No;
 
 	USART_Init(UART4, &uart4);
+
+	USART_Cmd(UART4, ENABLE);
+	NVIC_EnableIRQ(UART4_IRQn);
+	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
 }
 
 #define MAX_RX_COUNT 30
