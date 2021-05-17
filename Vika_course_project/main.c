@@ -16,12 +16,11 @@ uint32_t max_green_delay_count = 500,
          green_delay_count = 500;
 				 
 void SysTick_Handler(void) {
-	if (green_delay_count > 0) {
+	if (green_delay_count > 0)
 		green_delay_count--;
-		if (green_delay_count == 0) {
-			green_delay_count = max_green_delay_count;
-			GREEN_TOGGLE();
-		}
+	else{
+		green_delay_count = max_green_delay_count;
+		GREEN_TOGGLE();
 	}
 }
 
@@ -122,7 +121,7 @@ void parse_command (void) {
 		return;
 	}else {
 		return_error();
-		return;
+		return; 
 	}		
 }
 
@@ -130,10 +129,7 @@ int main (void) {
 	SysTick_Config(SystemCoreClock/1000);
 	init_GPIO();
 	init_UART();
-	USART_Cmd(UART4, ENABLE);
-	NVIC_EnableIRQ(UART4_IRQn);
-	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
-	
+		
 	while(1) {
 		if (command_recieve) {
 			parse_command();
